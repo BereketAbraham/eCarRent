@@ -1,2 +1,2 @@
 # eCarRent
-This is a group project for Software Engineering CS425 @MUM
+This is a group project for Software Engineering CS425 @ MUM
