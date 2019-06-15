@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html layout:decorator="admin/shared/masterlayout"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+	<th:block layout:fragment="header">
+		<span style="float:right;" class="text-muted">Logged in as: testmail@company.com</span>
+		<br>
+		<a class="btn btn-outline-success" style="float:right">LOG OUT</a>
+		<a class="btn btn-outline-success" style="float:right">Manage Your Account</a>
+		<br/><br/>
+	</th:block>
+    <th:block layout:fragment="content">
+    	<h1>Welcome to your eCarRent ADMIN Page</h1>
+		<hr style = "background:green">
+    	<div style="font-size: 1em">
+            From this page, you have access to manage all Vehicles, Vehicle Categories, 
+            vehicle Bookings, System Users, Customer Information, Payment Information and
+            more. Somebody should put some more text here because this looks soooo small on
+            the web page :). Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic type setting.
+            Company policy for accessing and managing corporate data is also included in the 
+            <a href="/wmcrm/customers/list/primecustomers">about</a> page.
+            Please select the choice of your action below or go to the about page 
+            <a href="/wmcrm/customers/list/primecustomers">here</a> for detail information 
+            and instructions about system usage, credentials and authorizations. 
+            <br/><br/>
+            <br/><br/>
+        </div>
+    </th:block>
+    <th:block layout:fragment="footer">
+    	<span>
+    		&nbsp;&nbsp;
+    		<a href="/company/admin/vehicles" class="btn btn-outline-warning">MANAGE VEHICLES</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    		<a href="/company/page/underconstruction" class="btn btn-outline-warning">MANAGE BOOKINGS</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    		<a href="/company/page/underconstruction" class="btn btn-outline-warning">MANAGE CUSTOMERS</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    		<a href="/company/page/underconstruction" class="btn btn-outline-warning">MANAGE PAYMENTS</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="/company/page/underconstruction" class="btn btn-outline-warning">BOOK VEHICLE</a>
+   		</span>
+    </th:block>
+</body>
+</html>

@@ -9,6 +9,6 @@ public interface IBookingService {
 	Booking save(Booking booking);
 	Booking findById(Long bId);
 	void delete(Long bId);
-	String count();
+	String assignBookingNumber();
 
 }

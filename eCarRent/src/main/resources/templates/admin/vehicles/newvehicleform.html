@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html layout:decorator="admin/shared/masterlayout"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+	<th:block layout:fragment="header"></th:block>
+    <th:block layout:fragment="content">
+		<h3>NEW VEHICLE FORM</h3>
+    	<form id="vehicleForm" method="post" action="/company/admin/vehicles/add/save" th:object="${vehicle}">
+            <fieldset>
+                <input type="hidden" name="vehicleId" th:value="${vehicle.vehicleId}" />
+                <div style="float:right;">
+                    <a href="/company/admin/vehicles" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Add Vehicle</button>
+                </div>
+                <br></br>
+                
+                <div class="form-group">               
+					<label for="customerNumber">Category Number</label>
+                    <span th:if="${#fields.hasErrors('vehicleNumber')}" th:errors="*{vehicleNumber}" class="alert alert-danger"></span>
+                    <input id="vehicleNumber" name="vehicleNumber" type="text" class="form-control" th:value="${vehicle.vehicleNumber}" readonly>              
+                </div>
+                
+                <div class="form-group">               
+					<label for="plateNumber">Plate Number</label>
+                    <span th:if="${#fields.hasErrors('plateNumber')}" th:errors="*{plateNumber}" class="alert alert-danger"></span>
+                    <input id="plateNumber" name="plateNumber" type="text" class="form-control" th:value="${vehicle.plateNumber}">              
+                </div>
+                
+                <div class="form-group">               
+					<label for="make">Make</label>
+                    <span th:if="${#fields.hasErrors('make')}" th:errors="*{make}" class="alert alert-danger"></span>
+                    <input id="make" name="make" type="text" class="form-control" th:value="${vehicle.make}">              
+                </div>
+                
+                <div class="form-group">               
+					<label for="model">Model</label>
+                    <span th:if="${#fields.hasErrors('model')}" th:errors="*{model}" class="alert alert-danger"></span>
+                    <input id="model" name="model" type="text" class="form-control" th:value="${vehicle.model}">              
+                </div>
+                
+                <div class="form-group">               
+					<label for="year">Year</label>
+                    <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}" class="alert alert-danger"></span>
+                    <input id="year" name="year" type="text" class="form-control" th:value="${vehicle.year}">              
+                </div>
+                
+                <div class="form-group">               
+					<label for="category">Category</label>
+                    <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}" class="alert alert-danger"></span>
+                    <input id="category" name="category" type="text" class="form-control" th:value="${vehicle.category}">              
+                </div>             
+            </fieldset>
+        </form>
+    </th:block>
+    <th:block layout:fragment="footer"></th:block>
+</body>
+</html>

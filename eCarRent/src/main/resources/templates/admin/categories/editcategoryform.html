@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html layout:decorator="admin/shared/masterlayout"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+	<th:block layout:fragment="header"></th:block>
+    <th:block layout:fragment="content">
+		<h3>NEW CATEGORY FORM</h3>
+    	<form id="categoryForm" method="post" action="/company/admin/categories/add/save" th:object="${category}">
+            <fieldset>
+            	<legend>Edit Vehicle Category: [[${category.categoryId}]] - [[${category.categoryName}]]</legend>
+                <input type="hidden" name="categoryId" th:value="${category.categoryId}" />
+                <div style="float:right;">
+                    <a href="/company/admin/categories" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/company/admin/categories/delete/' + ${category.categoryId}}" class="btn btn-outline-warning">Delete</a>&nbsp;&nbsp;&nbsp;
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Update</button>
+                </div>
+                <br></br>
+                <div class="form-group">               
+					<label for="customerNumber">Category Name</label>
+                    <span th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}" class="alert alert-danger"></span>
+                    <input id="categoryName" name="categoryName" type="text" class="form-control" th:value="${category.categoryName}">              
+                </div>
+                
+                <div class="form-group">
+                   	<label for="name">Number of Seats</label>
+                 	<span th:if="${#fields.hasErrors('seats')}" th:errors="*{seats}" class="alert alert-danger"></span>
+                  	<input id="seats" name="seats" type="text" class="form-control" th:value="${category.seats}">
+                </div>
+                
+                <div class="form-group">
+                	<label for="name">Number of Doors</label>
+                   	<span th:if="${#fields.hasErrors('doors')}" th:errors="*{doors}" class="alert alert-danger"></span>
+                    <input id="doors" name="doors" type="text" class="form-control" th:value="${category.doors}">
+                </div>
+                
+                <div class="form-group">
+                	<label for="name">Fuel Economy</label>
+                   	<span th:if="${#fields.hasErrors('fuelEconomy')}" th:errors="*{fuelEconomy}" class="alert alert-danger"></span>
+                    <input id="fuelEconomy" name="fuelEconomy" type="text" class="form-control" th:value="${category.fuelEconomy}">
+                </div>
+                
+                <div class="form-group">
+                	<label for="name">Daily Rate</label>
+                   	<span th:if="${#fields.hasErrors('ratePerDay')}" th:errors="*{ratePerDay}" class="alert alert-danger"></span>
+                    <input id="ratePerDay" name="ratePerDay" type="text" class="form-control" th:value="${category.ratePerDay}">
+                </div>              
+            </fieldset>
+        </form>
+    </th:block>
+    <th:block layout:fragment="footer"></th:block>
+</body>
+</html>

@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 public class Address {
 	
 	@Id
-	@Column(name = "vehicle_id")
+	@Column(name = "address_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long addressId;
 	

@@ -42,7 +42,7 @@ public class BookingService implements IBookingService{
 	}
 
 	@Override
-	public String count() {
+	public String assignBookingNumber() {
 		// TODO Auto-generated method stub
 		return null;
 	}

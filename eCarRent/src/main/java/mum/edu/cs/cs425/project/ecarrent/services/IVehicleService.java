@@ -9,6 +9,6 @@ public interface IVehicleService {
 	Vehicle save(Vehicle vehicle);
 	Vehicle findById(Long vId);
 	void delete(Long vId);
-	String count();
+	String assignVehicleNumber();
 
 }

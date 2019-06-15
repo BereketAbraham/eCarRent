@@ -19,26 +19,22 @@ public class CategoryService implements ICategoryService{
 
 	@Override
 	public List<Category> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return categoryRepository.findAll();
 	}
 
 	@Override
 	public Category save(Category category) {
-		// TODO Auto-generated method stub
-		return null;
+		return categoryRepository.save(category);
 	}
 
 	@Override
 	public Category findById(Long cId) {
-		// TODO Auto-generated method stub
-		return null;
+		return categoryRepository.findById(cId).orElse(null);
 	}
 
 	@Override
 	public void delete(Long cId) {
-		// TODO Auto-generated method stub
-		
+		categoryRepository.deleteById(cId);
 	}
 
 }

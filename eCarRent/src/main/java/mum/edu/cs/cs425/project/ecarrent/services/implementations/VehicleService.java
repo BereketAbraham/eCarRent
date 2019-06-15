@@ -19,32 +19,28 @@ public class VehicleService implements IVehicleService{
 
 	@Override
 	public List<Vehicle> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return vehicleRepository.findAll();
 	}
 
 	@Override
 	public Vehicle save(Vehicle vehicle) {
-		// TODO Auto-generated method stub
-		return null;
+		return vehicleRepository.save(vehicle);
 	}
 
 	@Override
 	public Vehicle findById(Long vId) {
-		// TODO Auto-generated method stub
-		return null;
+		return vehicleRepository.findById(vId).orElse(null);
 	}
 
 	@Override
 	public void delete(Long vId) {
-		// TODO Auto-generated method stub
-		
+		vehicleRepository.deleteById(vId);
 	}
 
 	@Override
-	public String count() {
-		// TODO Auto-generated method stub
-		return null;
+	public String assignVehicleNumber() {
+		Long currentId = vehicleRepository.findAll().stream().mapToLong(Vehicle::getVehicleId).max().getAsLong();
+		return  "VHL" + (currentId + 1) ;
 	}
 
 }
