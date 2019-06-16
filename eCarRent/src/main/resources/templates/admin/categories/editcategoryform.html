@@ -16,7 +16,7 @@
                 </div>
                 <br></br>
                 <div class="form-group">               
-					<label for="customerNumber">Category Name</label>
+					<label for="categoryName">Category Name</label>
                     <span th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}" class="alert alert-danger"></span>
                     <input id="categoryName" name="categoryName" type="text" class="form-control" th:value="${category.categoryName}">              
                 </div>
