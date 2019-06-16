@@ -15,6 +15,7 @@
                     <button id="btnSubmit" type="submit" class="btn btn-outline-success">Update</button>
                 </div>
                 <br></br>
+<<<<<<< HEAD
                 <div class="container" style="margin-top: 1em;">
                    	<div class="row">
 		                <div class="col-md-6">
@@ -51,6 +52,37 @@
 		                </div>
 	                </div>
                 </div>             
+=======
+                <div class="form-group">               
+					<label for="categoryName">Category Name</label>
+                    <span th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}" class="alert alert-danger"></span>
+                    <input id="categoryName" name="categoryName" type="text" class="form-control" th:value="${category.categoryName}">              
+                </div>
+                
+                <div class="form-group">
+                   	<label for="name">Number of Seats</label>
+                 	<span th:if="${#fields.hasErrors('seats')}" th:errors="*{seats}" class="alert alert-danger"></span>
+                  	<input id="seats" name="seats" type="text" class="form-control" th:value="${category.seats}">
+                </div>
+                
+                <div class="form-group">
+                	<label for="name">Number of Doors</label>
+                   	<span th:if="${#fields.hasErrors('doors')}" th:errors="*{doors}" class="alert alert-danger"></span>
+                    <input id="doors" name="doors" type="text" class="form-control" th:value="${category.doors}">
+                </div>
+                
+                <div class="form-group">
+                	<label for="name">Fuel Economy</label>
+                   	<span th:if="${#fields.hasErrors('fuelEconomy')}" th:errors="*{fuelEconomy}" class="alert alert-danger"></span>
+                    <input id="fuelEconomy" name="fuelEconomy" type="text" class="form-control" th:value="${category.fuelEconomy}">
+                </div>
+                
+                <div class="form-group">
+                	<label for="name">Daily Rate</label>
+                   	<span th:if="${#fields.hasErrors('ratePerDay')}" th:errors="*{ratePerDay}" class="alert alert-danger"></span>
+                    <input id="ratePerDay" name="ratePerDay" type="text" class="form-control" th:value="${category.ratePerDay}">
+                </div>              
+>>>>>>> 252d0da7b99e50e8dc4f0ed6bc7af13edd7d7715
             </fieldset>
         </form>
     </th:block>

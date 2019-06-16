@@ -19,26 +19,22 @@ public class UserService implements IUserService{
 
 	@Override
 	public List<User> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findAll();
 	}
 
 	@Override
 	public User save(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.save(user);
 	}
 
 	@Override
 	public User findById(Long uId) {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findById(uId).orElse(null);
 	}
 
 	@Override
 	public void delete(Long uId) {
-		// TODO Auto-generated method stub
-		
+		userRepository.deleteById(uId);
 	}
 
 }
