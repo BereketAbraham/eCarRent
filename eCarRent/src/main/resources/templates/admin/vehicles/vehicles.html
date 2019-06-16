@@ -35,9 +35,9 @@
 					<td th:text="${vehicle.make}"></td>
 					<td th:text="${vehicle.model}"></td>
 					<td th:text="${vehicle.year}"></td>
-					<td th:text="${vehicle.category}"></td>
+					<td th:text="${vehicle.category.categoryName}"></td>
 					<td>
-						<a th:href="@{'/company/admin/vehicles/edit' + ${vehicle.vehicleId}}" class="btn btn-outline-success">Edit</a>
+						<a th:href="@{'/company/admin/vehicles/edit/' + ${vehicle.vehicleId}}" class="btn btn-outline-success">Edit</a>
 						<a th:href="@{'/company/admin/vehicles/delete/' + ${vehicle.vehicleId}}" class="btn btn-outline-warning">Delete</a>
 					</td>
 				</tr>
