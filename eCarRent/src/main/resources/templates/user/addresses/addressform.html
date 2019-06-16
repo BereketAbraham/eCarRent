@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html layout:decorator="admin/shared/masterlayout"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+	<th:block layout:fragment="header"></th:block>
+    <th:block layout:fragment="content">
+    			<h3>NEW ADDRESS FORM</h3>
+    	<form id="addressForm" method="post" action="/company/user/addresses/add/save" th:object="${address}">
+            <fieldset>
+                <input type="hidden" name="addressId" th:value="${address.addressId}" />
+                <div style="float:right;">
+                    <a href="/company/admin/vehicles" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Add Address</button>
+                </div>
+                <br></br>
+                <div class="container" style="margin-top: 1em;">
+                   	<div class="row">
+               			<div class="col-md-6">
+			                <div class="form-group">               
+								<label for="streetLine1">Street Line 1</label>
+			                    <span th:if="${#fields.hasErrors('streetLine1')}" th:errors="*{streetLine1}" class="alert alert-danger"></span>
+			                    <input id="streetLine1" name="streetLine1" type="text" class="form-control" th:value="${address.streetLine1}">              
+			                </div>
+			                
+			                <div class="form-group">               
+								<label for="streetLine2">Street Line 2</label>
+			                    <span th:if="${#fields.hasErrors('streetLine2')}" th:errors="*{streetLine2}" class="alert alert-danger"></span>
+			                    <input id="streetLine2" name="streetLine2" type="text" class="form-control" th:value="${address.streetLine2}">              
+			                </div>
+			                
+			                <div class="form-group">               
+								<label for="city">City</label>
+			                    <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="alert alert-danger"></span>
+			                    <input id="city" name="city" type="text" class="form-control" th:value="${address.city}">              
+			                </div>
+	                 	</div>
+	                 	<div class="col-md-6">
+		                	<div class="form-group">               
+							<label for="state">State</label>
+		                    <span th:if="${#fields.hasErrors('state')}" th:errors="*{state}" class="alert alert-danger"></span>
+		                    <input id="state" name="state" type="text" class="form-control" th:value="${address.state}">              
+		                	</div>
+	                
+			                <div class="form-group">               
+								<label for="zipCode">Zip Code</label>
+			                    <span th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}" class="alert alert-danger"></span>
+			                    <input id="zipCode" name="zipCode" type="text" class="form-control" th:value="${address.zipCode}">              
+			                </div>
+	                
+			                <div class="form-group">               
+								<label for="country">Country</label>
+			                    <span th:if="${#fields.hasErrors('country')}" th:errors="*{country}" class="alert alert-danger"></span>
+			                    <input id="country" name="country" type="text" class="form-control" th:value="${address.country}">              
+			                </div>    
+			          </div>         
+            </fieldset>
+        </form>
+    </th:block>
+    <th:block layout:fragment="footer"></th:block>
+</body>
+</html>
