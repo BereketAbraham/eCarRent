@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html layout:decorator="admin/shared/masterlayout"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+	<th:block layout:fragment="header">
+		<span style="float:right;" class="text-muted">Logged in as: testmail@company.com</span>
+		<br>
+		<a class="btn btn-outline-success" style="float:right" href="/company/page/underconstruction">LOG OUT</a>
+		<a class="btn btn-outline-success" style="float:right" href=/company/page/underconstruction>Manage Your Account</a>
+		<a class="btn btn-outline-success" style="float:left" href="/company/admin/home">ADMIN HOME</a>
+		<br/><br/>
+		<hr style = "background:green">
+	</th:block>
+    <th:block layout:fragment="content">
+		<a>P A Y M E N T S</a>
+		<a style="float:right;" href="/company/user/payments/add">ADD NEW PAYMENT</a>
+		<a style="float:right; padding-right: 2em;" href="/company/user/payments">MANAGE PAYMENTS</a>
+		<br></br>
+    	<table class="table table-striped">
+			<thead>
+				<th scope="col">No.</th>
+				<th>Payment Type</th>
+				<th>Card Number</th>
+				<th>Card CVV</th>
+				<th>Total Payment</th>
+				<th>Payment Status</th>
+				<th>Payment Date</th>
+			</thead>
+			<tbody>
+				<tr th:each="payment, rowNumbering : ${payments}">
+					<td scope="row" th:text="${rowNumbering.count}+'.'"></td>
+					<td th:text="${payment.paymentType}"></td>
+					<td th:text="${payment.cardNumber}"></td>
+					<td th:text="${payment.cardCVV}"></td>
+					<td th:text="${payment.totalPrice}"></td>
+					<td th:text="${payment.paymentStatus}"></td>
+					<td th:text="${payment.paymentDate}"></td>
+					<td>
+						<a th:href="@{'/company/user/payments/edit/' + ${payment.paymentId}}" class="btn btn-outline-success">Edit</a>
+						<a th:href="@{'/company/user/payments/delete/' + ${payment.paymentId}}" class="btn btn-outline-warning">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+    </th:block>
+    <th:block layout:fragment="footer"></th:block>
+</body>
+</html>

@@ -1,5 +1,7 @@
 package mum.edu.cs.cs425.project.ecarrent.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "payments")
 public class Payment {
@@ -22,8 +26,9 @@ public class Payment {
 	private Long paymentId;
 	
 	@Column(name = "payment_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "*Please provide payment date") 
-	private Double paymentDate;
+	private LocalDate paymentDate;
 
 	@Column(name = "payment_type")
 	@NotNull(message = "*Please provide payment type") 
@@ -33,9 +38,9 @@ public class Payment {
 	@NotNull(message = "*Please provide payment card type") 
     private Long cardNumber;
     
-	@Column(name = "card_csv")
-	@NotNull(message = "*Please provide payment card CSV") 
-    private Integer cardCSV;
+	@Column(name = "card_cvv")
+	@NotNull(message = "*Please provide payment card CVV") 
+    private Integer cardCVV;
     
 	@Column(name = "total_price") 
     private Double totalPrice;
@@ -53,14 +58,14 @@ public class Payment {
 	
 	public Payment() {}
 
-	public Payment(Long paymentId, Double paymentDate,
-			String paymentType, Long cardNumber, Integer cardCSV, Double totalPrice, Address billingAddress,
+	public Payment(Long paymentId, LocalDate paymentDate,
+			String paymentType, Long cardNumber, Integer cardCVV, Double totalPrice, Address billingAddress,
 			String paymentStatus, Booking booking) {
 		this.paymentId = paymentId;
 		this.paymentDate = paymentDate;
 		this.paymentType = paymentType;
 		this.cardNumber = cardNumber;
-		this.cardCSV = cardCSV;
+		this.cardCVV = cardCVV;
 		this.totalPrice = totalPrice;
 		this.billingAddress = billingAddress;
 		this.paymentStatus = paymentStatus;
@@ -75,11 +80,11 @@ public class Payment {
 		this.paymentId = paymentId;
 	}
 
-	public Double getPaymentDate() {
+	public LocalDate getPaymentDate() {
 		return paymentDate;
 	}
 
-	public void setPaymentDate(Double paymentDate) {
+	public void setPaymentDate(LocalDate paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 
@@ -99,12 +104,12 @@ public class Payment {
 		this.cardNumber = cardNumber;
 	}
 
-	public Integer getCardCSV() {
-		return cardCSV;
+	public Integer getCardCVV() {
+		return cardCVV;
 	}
 
-	public void setCardCSV(Integer cardCSV) {
-		this.cardCSV = cardCSV;
+	public void setCardCVV(Integer cardCVV) {
+		this.cardCVV = cardCVV;
 	}
 
 	public Double getTotalPrice() {

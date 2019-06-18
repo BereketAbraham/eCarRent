@@ -25,7 +25,7 @@ public class UserController {
     private IUserService userService;
 	
 	@GetMapping(value = "/company/user/users")
-    public ModelAndView manageCategories() {
+    public ModelAndView manageUsers() {
         ModelAndView modelAndView = new ModelAndView();
         List<User> users = userService.findAll();
         modelAndView.addObject("users", users);
@@ -33,12 +33,18 @@ public class UserController {
         return modelAndView;
     }
 	
+	@GetMapping(value = "/company/user/users/add")
+    public String newUserForm(Model model) {
+        model.addAttribute("user", new User());
+        return "user/users/newuserform";
+    }
+	
 	@PostMapping(value = "/company/user/users/add/save")
     public String addNewUser(@Valid @ModelAttribute("user") User user,
         BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
-            return "user/users/newcategoryform";
+            return "user/users/newuserform";
         }
         user = userService.save(user);
         return "redirect:/company/user/users";

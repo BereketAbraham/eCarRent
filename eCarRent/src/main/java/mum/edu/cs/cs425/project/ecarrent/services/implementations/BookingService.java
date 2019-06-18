@@ -21,25 +21,22 @@ public class BookingService implements IBookingService{
 
 	@Override
 	public List<Booking> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return bookingRepository.findAll();
 	}
 
 	@Override
 	public Booking save(Booking booking) {
-		// TODO Auto-generated method stub
-		return null;
+		return bookingRepository.save(booking);
 	}
 
 	@Override
 	public Booking findById(Long bId) {
-		// TODO Auto-generated method stub
-		return null;
+		return bookingRepository.findById(bId).orElse(null);
 	}
 
 	@Override
 	public void delete(Long bId) {
-		// TODO Auto-generated method stub
+		bookingRepository.deleteById(bId);
 		
 	}
 

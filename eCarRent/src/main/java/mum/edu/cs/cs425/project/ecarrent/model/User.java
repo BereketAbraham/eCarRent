@@ -17,6 +17,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -35,6 +37,7 @@ public class User {
     private String lastName;
 
 	@Column(name = "date_of_birth")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "*Please provide user date of birth") 
     private LocalDate dateOfBirth;
 
