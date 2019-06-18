@@ -1,10 +1,13 @@
 package mum.edu.cs.cs425.project.ecarrent.model;
 
+import java.awt.image.BufferedImage;
+import java.sql.Blob;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,7 +44,7 @@ public class Category {
 	@NotNull(message = "*Please provide rate per day")
 	private Float ratePerDay;
 	
-	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Vehicle> vehicles;
 
 	public Category() {}

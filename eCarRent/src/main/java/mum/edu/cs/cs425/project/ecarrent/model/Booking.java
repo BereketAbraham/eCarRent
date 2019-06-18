@@ -30,13 +30,13 @@ public class Booking {
 	@NotNull(message = "*Please provide booking date")
 	private LocalDate bookingDate;
 
-	@Column(name = "start_date_time")
+	@Column(name = "start_date")
 	@NotNull(message = "*Please provide booking start date and time")
-    private LocalDateTime startDateTime;
+    private LocalDate startDate;
 
-	@Column(name = "end_date_time")
+	@Column(name = "end_date")
 	@NotNull(message = "*Please provide booking end date and time")
-    private LocalDateTime endDateTime;
+    private LocalDate endDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "vehicle_id", nullable = false)
@@ -52,24 +52,24 @@ public class Booking {
 
     public Booking() {}
     
-	public Booking(Long bookingId, String referenceNumber, LocalDate bookingDate, LocalDateTime startDateTime, 
-			LocalDateTime endDateTime, Vehicle vehicle, User user, Payment payment) {
+	public Booking(Long bookingId, String referenceNumber, LocalDate bookingDate, LocalDate startDate, 
+			LocalDate endDate, Vehicle vehicle, User user, Payment payment) {
 		this.bookingId = bookingId;
 		this.referenceNumber = referenceNumber;
 		this.bookingDate = bookingDate;
-		this.startDateTime = startDateTime;
-		this.endDateTime = endDateTime;
+		this.startDate = startDate;
+		this.endDate = endDate;
 		this.vehicle = vehicle;
 		this.user = user;
 		this.payment = payment;
 	}
 	
-	public Booking(Long bookingId, LocalDate bookingDate, LocalDateTime startDateTime, 
-			LocalDateTime endDateTime, User user) {
+	public Booking(Long bookingId, LocalDate bookingDate, LocalDate startDate, 
+			LocalDate endDate, User user) {
 		this.bookingId = bookingId;
 		this.bookingDate = bookingDate;
-		this.startDateTime = startDateTime;
-		this.endDateTime = endDateTime;
+		this.startDate = startDate;
+		this.endDate = endDate;
 		this.user = user;
 	}
 
@@ -99,20 +99,20 @@ public class Booking {
 		this.bookingDate = bookingDate;
 	}
 
-	public LocalDateTime getStartDateTime() {
-		return startDateTime;
+	public LocalDate getStartDate() {
+		return startDate;
 	}
 
-	public void setStartDateTime(LocalDateTime startDateTime) {
-		this.startDateTime = startDateTime;
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
 	}
 
-	public LocalDateTime getEndDateTime() {
-		return endDateTime;
+	public LocalDate getEndDate() {
+		return endDate;
 	}
 
-	public void setEndDateTime(LocalDateTime endDateTime) {
-		this.endDateTime = endDateTime;
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
 	}
 
 	public Vehicle getVehicle() {
