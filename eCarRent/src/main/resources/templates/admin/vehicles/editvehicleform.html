@@ -42,7 +42,7 @@
 								<label for="category">Category</label>
 			                    <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}" class="alert alert-danger"></span>
 			                    <select name="category" id="category" class="form-control" required="required">
-			                         	<option value="categoryName">Select a Category</option>
+			                         	<option value="">Select a Category</option>
 			                           	<option th:each="category : ${categories}" th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
 			                    </select>
 			                </div>

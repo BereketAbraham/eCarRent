@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import mum.edu.cs.cs425.project.ecarrent.model.Category;
 import mum.edu.cs.cs425.project.ecarrent.model.Vehicle;
+import mum.edu.cs.cs425.project.ecarrent.services.ICategoryService;
 import mum.edu.cs.cs425.project.ecarrent.services.IVehicleService;
 
 @Controller
@@ -20,6 +21,9 @@ public class VehicleController {
 	
 	@Autowired
     private IVehicleService vehicleService;
+	
+	@Autowired
+	private ICategoryService categoryService;
 	
 	@GetMapping(value = "/company/admin/vehicles")
     public ModelAndView manageVehicles() {
@@ -34,7 +38,9 @@ public class VehicleController {
     public String newVehicleForm(Model model) {
 		Vehicle newVehicle = new Vehicle();
 		newVehicle.setVehicleNumber(vehicleService.assignVehicleNumber());
+        List<Category> categories = categoryService.findAll();
         model.addAttribute("vehicle", newVehicle);
+        model.addAttribute("categories", categories);
         return "admin/vehicles/newvehicleform";
     }
 	
@@ -52,8 +58,10 @@ public class VehicleController {
 	@GetMapping(value = "/company/admin/vehicles/edit/{vehicleId}")
     public String editVehicleForm(@PathVariable("vehicleId") Long vehicleId, Model model) {
 		Vehicle vehicle = vehicleService.findById(vehicleId);
+		List<Category> categories = categoryService.findAll();
         if (vehicle != null) {
             model.addAttribute("vehicle", vehicle);
+            model.addAttribute("categories", categories);
             return "admin/vehicles/editvehicleform";
         }
         return "admin/vehicles/vehicles";

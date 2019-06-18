@@ -7,6 +7,7 @@ import mum.edu.cs.cs425.project.ecarrent.model.Vehicle;
 
 public interface IAddressService {
 	
+	List<Address>findAll();
 	Address save(Address address);
 	Address findById(Long aId);
 	void delete(Long aId);

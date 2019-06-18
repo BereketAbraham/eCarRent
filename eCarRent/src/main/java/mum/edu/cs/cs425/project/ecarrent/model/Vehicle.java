@@ -44,6 +44,7 @@ public class Vehicle {
 	
 	@ManyToOne
 	@JoinColumn(name="category_id", nullable = false)
+	@NotNull(message = "*Please select category")
 	private Category category;
 	
 	@OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
@@ -52,7 +53,7 @@ public class Vehicle {
 	public Vehicle() {}
 
 	public Vehicle(Long vehicleId, String vehicleNumber, Integer plateNumber, String make, String model,
-			Integer year, Category category) {
+			Integer year) {
 		super();
 		this.vehicleId = vehicleId;
 		this.vehicleNumber = vehicleNumber;
@@ -60,7 +61,6 @@ public class Vehicle {
 		this.make = make;
 		this.model = model;
 		this.year = year;
-		this.category = category;
 	}
 
 	public Long getVehicleId() {
