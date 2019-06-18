@@ -12,34 +12,32 @@
 		<hr style = "background:green">
 	</th:block>
     <th:block layout:fragment="content">
-    	<a>BOOKINGS</a>
-		<a style="float:right;" href="/company/admin/bookings/addnew">ADD NEW BOOKING</a>
+    	<a>ADDRESSES</a>
+		<a style="float:right;" href="/company/user/addresses/add">ADD NEW ADDRESS</a>
 		<br></br>
     	<table class="table table-striped">
 			<thead>
 				<th scope="col">No.</th>
-				<th>Reference Number</th>
-				<th>Booking Date</th>
-				<th>Start Date</th>
-				<th>End Date</th>
-				<th>Vehicle</th>
-				<th>User</th>
-				<th>Payments</th>
+				<th>Street Line 1</th>
+				<th>Street Line 2</th>
+				<th>City</th>
+				<th>State</th>
+				<th>Zip Code</th>
+				<th>Country</th>
 				<th>Actions</th>
 			</thead>
 			<tbody>
-				<tr th:each="vehicle, rowNumbering : ${vehicles}">
+				<tr th:each="address, rowNumbering : ${addresses}">
 					<td scope="row" th:text="${rowNumbering.count}+'.'"></td>
-					<td th:text="${booking.referenceNumber}"></td>
-					<td th:text="${booking.bookingDate}"></td>
-					<td th:text="${booking.startDate}"></td>
-					<td th:text="${booking.endDate}"></td>
-					<td th:text="${booking.vehicle.vehicleNumber}"></td>
-					<td th:text="${booking.user.firstName}"></td>
-					<td th:text="${booking.payment.paymentId}"></td>
+					<td th:text="${address.streetLine1}"></td>
+					<td th:text="${address.streetLine2}"></td>
+					<td th:text="${address.city}"></td>
+					<td th:text="${address.state}"></td>
+					<td th:text="${address.zipcode}"></td>
+					<td th:text="${address.country}"></td>
 					<td>
-						<a th:href="@{'/company/admin/bookings/edit/' + ${booking.bookingId}}" class="btn btn-outline-success">Edit</a>
-						<a th:href="@{'/company/admin/bookings/delete/' + ${booking.bookingId}}" class="btn btn-outline-warning">Delete</a>
+						<a th:href="@{'/company/user/addresses/edit/' + ${address.addressId}}" class="btn btn-outline-success">Edit</a>
+						<a th:href="@{'/company/user/addresses/delete/' + ${address.addressId}}" class="btn btn-outline-warning">Delete</a>
 					</td>
 				</tr>
 			</tbody>

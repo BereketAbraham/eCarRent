@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html layout:decorator="admin/shared/masterlayout"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+	<th:block layout:fragment="header"></th:block>
+    <th:block layout:fragment="content">
+    			<h3>NEW BOOKING FORM</h3>
+    	<form id="bookingForm" method="post" action="/company/admin/bookings/addnew/save" th:object="${booking}">
+            <fieldset>
+                <input type="hidden" name="bookingId" th:value="${booking.bookingId}" />
+                <div style="float:right;">
+                    <a href="/company/admin/bookings" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Add Booking</button>
+                </div>
+                <br></br>
+                <div class="container" style="margin-top: 1em;">
+                   	<div class="row">
+               			<div class="col-md-6">
+               			
+			                <div class="form-group">               
+								<label for="referenceNumber">Reference Number</label>
+			                    <span th:if="${#fields.hasErrors('referenceNumber')}" th:errors="*{referenceNumber}" class="alert alert-danger"></span>
+			                    <input id="referenceNumber" name="referenceNumber" type="text" class="form-control" th:value="${booking.referenceNumber}"> <!-- readonly> -->              
+			                </div>
+			                
+			                <div class="form-group">               
+								<label for="bookingDate">Booking Date</label>
+			                    <span th:if="${#fields.hasErrors('bookingDate')}" th:errors="*{bookingDate}" class="alert alert-danger"></span>
+			                    <input id="bookingDate" name="bookingDate" type="date" class="form-control" aria-describedby="bookingDatehHelp" th:value="${booking.bookingDate}">             
+			               		<small id="bookingDateHelp" class="form-text text-muted">Enter a valid Date.</small>
+			                </div>
+                
+                			<div class="form-group">               
+								<label for="startDate">Start Date</label>
+			                    <span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}" class="alert alert-danger"></span>
+			                    <input id="startDate" name="startDate" type="date" class="form-control" aria-describedby="startDatehHelp" th:value="${booking.startDate}">             
+			               		<small id="startDateHelp" class="form-text text-muted">Enter a valid Date.</small>
+			                </div>
+			                
+			                <div class="form-group">               
+								<label for="endDate">End Date</label>
+			                    <span th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}" class="alert alert-danger"></span>
+			                    <input id="endDate" name="endDate" type="date" class="form-control" aria-describedby="endDatehHelp" th:value="${booking.endDate}">             
+			               		<small id="endDateHelp" class="form-text text-muted">Enter a valid Date.</small>
+			                </div>
+                
+	                 	</div>
+	                 	
+	                 	<div class="col-md-6">
+	               
+		                	<div class="form-group">               
+								<label for="state">Vehicle</label>
+			                    <span th:if="${#fields.hasErrors('vehicle')}" th:errors="*{vehicle}" class="alert alert-danger"></span>
+			                    <select name="vehicle" id="vehicle" class="form-control" required="required">
+			                         	<option value="vehicleNumber">Select a Vehicle Number</option>
+			                           	<option th:each="vehicle : ${vehicles}" th:value="${vehicle.vehicleNumber}" th:text="${vehicle.vehicleNumber}"></option>
+			                    </select>              
+		                	</div>
+	                
+			                <div class="form-group">               
+								<label for="zipCode">User</label>
+			                    <span th:if="${#fields.hasErrors('user')}" th:errors="*{user}" class="alert alert-danger"></span>
+			                    <select name="user" id="user" class="form-control" required="required">
+			                         	<option value="firstName">Select a Vehicle Number</option>
+			                           	<option th:each="user : ${users}" th:value="${user.firstName}" th:text="${user.firstName}"></option>
+			                    </select>                
+			                </div>
+	                
+			                <div class="form-group">               
+								<label for="country">Payment</label>
+			                    <span th:if="${#fields.hasErrors('payment')}" th:errors="*{payment}" class="alert alert-danger"></span>
+			                    <select name="payment" id="payment" class="form-control" required="required">
+			                         	<option value="paymentId">Select a Payment Id</option>
+			                           	<option th:each="payment : ${payments}" th:value="${payment.paymentId}" th:text="${payment.paymentId}"></option>
+			                    </select>               
+			                </div> 
+			                   
+			          </div>         
+            </fieldset>
+        </form>
+    </th:block>
+    <th:block layout:fragment="footer"></th:block>
+</body>
+</html>

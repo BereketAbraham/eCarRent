@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "bookings")
 public class Booking {
@@ -27,16 +29,18 @@ public class Booking {
 	private String referenceNumber;
 	
 	@Column(name = "booking_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "*Please provide booking date")
 	private LocalDate bookingDate;
 
 	@Column(name = "start_date_time")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "*Please provide booking start date and time")
-    private LocalDateTime startDateTime;
+    private LocalDate startDate;
 
 	@Column(name = "end_date_time")
 	@NotNull(message = "*Please provide booking end date and time")
-    private LocalDateTime endDateTime;
+    private LocalDate endDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "vehicle_id", nullable = false)
@@ -51,29 +55,28 @@ public class Booking {
 	private Payment payment;
 
     public Booking() {}
-    
-	public Booking(Long bookingId, String referenceNumber, LocalDate bookingDate, LocalDateTime startDateTime, 
-			LocalDateTime endDateTime, Vehicle vehicle, User user, Payment payment) {
+
+	public Booking(Long bookingId, String referenceNumber, LocalDate bookingDate, LocalDate startDate,
+			LocalDate endDate, Vehicle vehicle, User user, Payment payment) {
+		super();
 		this.bookingId = bookingId;
 		this.referenceNumber = referenceNumber;
 		this.bookingDate = bookingDate;
-		this.startDateTime = startDateTime;
-		this.endDateTime = endDateTime;
+		this.startDate = startDate;
+		this.endDate = endDate;
 		this.vehicle = vehicle;
 		this.user = user;
 		this.payment = payment;
 	}
-	
-	public Booking(Long bookingId, LocalDate bookingDate, LocalDateTime startDateTime, 
-			LocalDateTime endDateTime, User user) {
+
+	public Booking(Long bookingId, LocalDate bookingDate, LocalDate startDate, LocalDate endDate, Payment payment) {
+		super();
 		this.bookingId = bookingId;
 		this.bookingDate = bookingDate;
-		this.startDateTime = startDateTime;
-		this.endDateTime = endDateTime;
-		this.user = user;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.payment = payment;
 	}
-
-
 
 	public Long getBookingId() {
 		return bookingId;
@@ -99,20 +102,20 @@ public class Booking {
 		this.bookingDate = bookingDate;
 	}
 
-	public LocalDateTime getStartDateTime() {
-		return startDateTime;
+	public LocalDate getStartDate() {
+		return startDate;
 	}
 
-	public void setStartDateTime(LocalDateTime startDateTime) {
-		this.startDateTime = startDateTime;
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
 	}
 
-	public LocalDateTime getEndDateTime() {
-		return endDateTime;
+	public LocalDate getEndDate() {
+		return endDate;
 	}
 
-	public void setEndDateTime(LocalDateTime endDateTime) {
-		this.endDateTime = endDateTime;
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
 	}
 
 	public Vehicle getVehicle() {

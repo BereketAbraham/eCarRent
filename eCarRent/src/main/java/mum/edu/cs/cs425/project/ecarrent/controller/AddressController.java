@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import mum.edu.cs.cs425.project.ecarrent.model.Address;
-import mum.edu.cs.cs425.project.ecarrent.model.Vehicle;
 import mum.edu.cs.cs425.project.ecarrent.services.IAddressService;
 
 @Controller
@@ -20,6 +19,15 @@ public class AddressController {
 	
 	@Autowired
 	private IAddressService addressService;
+	
+	@GetMapping(value = "/company/user/addresses")
+    public ModelAndView manageAddresses() {
+        ModelAndView modelAndView = new ModelAndView();
+        List<Address> addresses = addressService.findAll();
+        modelAndView.addObject("addresses", addresses);
+        modelAndView.setViewName("user/addresses/addresses");
+        return modelAndView;
+    }
 	
 	@GetMapping(value = "/company/user/addresses/add")
     public String newAddressForm(Model model) {
@@ -36,7 +44,7 @@ public class AddressController {
             return "user/addresses/addressform";
         }
         address = addressService.save(address);
-        return "redirect:/general/underconstruction";
+        return "redirect:/user/addresses/addresses";
     }
 	
 	@GetMapping(value = "/company/user/addresses/edit/{addressId}")
@@ -46,13 +54,24 @@ public class AddressController {
             model.addAttribute("address", address);
             return "user/addresses/addressform";
         }
-        return "redirect:/general/underconstruction";
+        return "redirect:/user/addresses/addresses";
+    }
+	
+	@PostMapping(value = "/company/admin/addresses/edit/save")
+    public String updateAddress(@Valid @ModelAttribute("address") Address address,
+            BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "user/addresses/addresseditform";
+        }
+        address = addressService.save(address);
+        return "redirect:/company/user/addresses";
     }
 	
 	@GetMapping(value="/company/user/addresses/delete/{addressId}")
 	public String deleteAddress(@PathVariable("addressId") Long id, Model model){		
 		addressService.delete(id);
-		return "redirect:/general/underconstruction";
+		return "redirect:/company/user/addresses";
 	}
 	
 }
