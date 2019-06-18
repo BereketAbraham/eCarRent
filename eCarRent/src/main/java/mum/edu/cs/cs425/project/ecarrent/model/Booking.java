@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "bookings")
 public class Booking {
@@ -27,14 +29,16 @@ public class Booking {
 	private String referenceNumber;
 	
 	@Column(name = "booking_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "*Please provide booking date")
 	private LocalDate bookingDate;
 
-	@Column(name = "start_date")
+	@Column(name = "start_date_time")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "*Please provide booking start date and time")
     private LocalDate startDate;
 
-	@Column(name = "end_date")
+	@Column(name = "end_date_time")
 	@NotNull(message = "*Please provide booking end date and time")
     private LocalDate endDate;
 	
@@ -51,9 +55,10 @@ public class Booking {
 	private Payment payment;
 
     public Booking() {}
-    
-	public Booking(Long bookingId, String referenceNumber, LocalDate bookingDate, LocalDate startDate, 
+
+	public Booking(Long bookingId, String referenceNumber, LocalDate bookingDate, LocalDate startDate,
 			LocalDate endDate, Vehicle vehicle, User user, Payment payment) {
+		super();
 		this.bookingId = bookingId;
 		this.referenceNumber = referenceNumber;
 		this.bookingDate = bookingDate;
@@ -63,17 +68,15 @@ public class Booking {
 		this.user = user;
 		this.payment = payment;
 	}
-	
-	public Booking(Long bookingId, LocalDate bookingDate, LocalDate startDate, 
-			LocalDate endDate, User user) {
+
+	public Booking(Long bookingId, LocalDate bookingDate, LocalDate startDate, LocalDate endDate, Payment payment) {
+		super();
 		this.bookingId = bookingId;
 		this.bookingDate = bookingDate;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.user = user;
+		this.payment = payment;
 	}
-
-
 
 	public Long getBookingId() {
 		return bookingId;
