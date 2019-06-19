@@ -18,6 +18,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -36,14 +38,15 @@ public class User {
     private String lastName;
 
 	@Column(name = "date_of_birth")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "*Please provide user date of birth") 
     private LocalDate dateOfBirth;
 
 	@Column(name = "license_number")
     private Long licenseNumber;
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Booking> bookings;
+//	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	private List<Booking> bookings;
 
 	@ManyToMany
 	@JoinTable(
@@ -53,7 +56,7 @@ public class User {
 	private List<Role> roles;
 	
 	@OneToOne
-	@JoinColumn(name="credential_id", nullable = false, unique = true)
+	@JoinColumn(name="credential_id", nullable = true, unique = true)
 	private Credential credential;
 
     public User() {}
@@ -106,13 +109,13 @@ public class User {
 		this.licenseNumber = licenseNumber;
 	}
 
-	public List<Booking> getBookings() {
-		return bookings;
-	}
-
-	public void setBookings(List<Booking> bookings) {
-		this.bookings = bookings;
-	}
+//	public List<Booking> getBookings() {
+//		return bookings;
+//	}
+//
+//	public void setBookings(List<Booking> bookings) {
+//		this.bookings = bookings;
+//	}
 
 	public List<Role> getRoles() {
 		return roles;

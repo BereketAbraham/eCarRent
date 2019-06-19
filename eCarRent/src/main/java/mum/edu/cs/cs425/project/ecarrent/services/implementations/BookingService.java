@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import mum.edu.cs.cs425.project.ecarrent.model.Booking;
 import mum.edu.cs.cs425.project.ecarrent.model.Payment;
+import mum.edu.cs.cs425.project.ecarrent.model.Vehicle;
 import mum.edu.cs.cs425.project.ecarrent.repository.IBookingRepository;
 import mum.edu.cs.cs425.project.ecarrent.services.IBookingService;
 
@@ -40,13 +41,12 @@ public class BookingService implements IBookingService{
 		bookingRepository.deleteById(bId);
 	}
 
-//	@Override
-//	public String assignReferenceNumber() {
-//		 Long currentId = bookingRepository.findAll().stream()
-//				 									 .mapToLong(Booking::getBookingId)
-//				 									 .max().getAsLong();
-//	     return  "BKN" + (currentId + 1) ;
-//	}
+	@Override
+	public String assignReferenceNumber() {
+		if(bookingRepository.findAll().stream().count() == 0) return "BN1";
+		Long currentId = bookingRepository.findAll().stream().mapToLong(Booking::getBookingId).max().getAsLong();
+		return  "BN" + (currentId + 1) ;
+	}
 
 }
 	

@@ -39,6 +39,7 @@ public class VehicleService implements IVehicleService{
 
 	@Override
 	public String assignVehicleNumber() {
+		if(vehicleRepository.findAll().stream().count() == 0) return "VHL1";
 		Long currentId = vehicleRepository.findAll().stream().mapToLong(Vehicle::getVehicleId).max().getAsLong();
 		return  "VHL" + (currentId + 1) ;
 	}

@@ -22,21 +22,21 @@
 				<th>Booking Date</th>
 				<th>Start Date</th>
 				<th>End Date</th>
-				<th>Vehicle</th>
+				<!-- <th>Vehicle</th> -->
 				<th>User</th>
-				<th>Payments</th>
+				<!-- <th>Payments</th> -->
 				<th>Actions</th>
 			</thead>
 			<tbody>
-				<tr th:each="vehicle, rowNumbering : ${vehicles}">
+				<tr th:each="booking, rowNumbering : ${bookings}">
 					<td scope="row" th:text="${rowNumbering.count}+'.'"></td>
 					<td th:text="${booking.referenceNumber}"></td>
 					<td th:text="${booking.bookingDate}"></td>
 					<td th:text="${booking.startDate}"></td>
 					<td th:text="${booking.endDate}"></td>
-					<td th:text="${booking.vehicle.vehicleNumber}"></td>
-					<td th:text="${booking.user.firstName}"></td>
-					<td th:text="${booking.payment.paymentId}"></td>
+					<!-- <td th:text="${booking.vehicle.vehicleId}"></td> -->
+					<td th:text="${booking.firstName}"></td>
+					<!-- <td th:text="${booking.payment.paymentId}"></td> -->
 					<td>
 						<a th:href="@{'/company/admin/bookings/edit/' + ${booking.bookingId}}" class="btn btn-outline-success">Edit</a>
 						<a th:href="@{'/company/admin/bookings/delete/' + ${booking.bookingId}}" class="btn btn-outline-warning">Delete</a>

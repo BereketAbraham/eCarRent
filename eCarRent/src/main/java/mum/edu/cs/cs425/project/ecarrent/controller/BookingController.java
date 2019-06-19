@@ -1,10 +1,11 @@
 package mum.edu.cs.cs425.project.ecarrent.controller;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import mum.edu.cs.cs425.project.ecarrent.model.Booking;
+import mum.edu.cs.cs425.project.ecarrent.model.Category;
 import mum.edu.cs.cs425.project.ecarrent.model.Payment;
 import mum.edu.cs.cs425.project.ecarrent.model.User;
 import mum.edu.cs.cs425.project.ecarrent.model.Vehicle;
@@ -24,6 +26,7 @@ import mum.edu.cs.cs425.project.ecarrent.services.IBookingService;
 import mum.edu.cs.cs425.project.ecarrent.services.IPaymentService;
 import mum.edu.cs.cs425.project.ecarrent.services.IUserService;
 import mum.edu.cs.cs425.project.ecarrent.services.IVehicleService;
+import mum.edu.cs.cs425.project.ecarrent.services.implementations.SearchService;
 
 @Controller
 public class BookingController {
@@ -40,6 +43,12 @@ public class BookingController {
 	@Autowired
     private IPaymentService paymentService;
 	
+	@Autowired
+	private SearchController searchController;
+	
+	@Autowired
+	private SearchService searchService;
+	
 	@RequestMapping(value = "/company/admin/bookings", method = RequestMethod.GET)
 	public ModelAndView bookingsList() {
 		List<Booking> bookings = bookingService.findAll();
@@ -52,7 +61,7 @@ public class BookingController {
 	@RequestMapping(value = "/company/admin/bookings/addnew", method = RequestMethod.GET)
 	public String newBookingForm(Model model) {
 		Booking newBooking = new Booking();
-		//newBooking.setReferenceNumber(bookingService.assignReferenceNumber());
+		newBooking.setReferenceNumber(bookingService.assignReferenceNumber());
 		List<Vehicle> vehicles = vehicleService.findAll();
 		List<User> users = userService.findAll();
 		List<Payment> payments = paymentService.findAll();
@@ -98,7 +107,50 @@ public class BookingController {
 	@GetMapping(value="/company/admin/bookings/delete/{bookingId}")
 	public String deleteBooking(@PathVariable("bookingId") Long id){
 		bookingService.delete(id);
-		return "redirect:/company/admin/bookings/bookings";
+		return "redirect:/company/admin/bookings";
+	}
+	
+	@RequestMapping(value = "/company/public/bookings/addnew/{category}", method = RequestMethod.GET)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	public String newPublicBookingForm(Model model, @PathVariable("category") Category category) {
+		Booking newBooking = new Booking();
+		Payment newPayment = new Payment();
+		paymentService.save(newPayment);
+		LocalDate start = searchController.getTemp().getStart();
+		LocalDate end = searchController.getTemp().getEnd();
+		Long dateDifference = (Long)(ChronoUnit.DAYS.between(start, end));
+		Float unitPrice = category.getRatePerDay();
+		Double totalPrice = (double) (dateDifference*unitPrice);
+		newBooking.setTotalPrice(totalPrice);
+		newBooking.setStartDate(start);
+		newBooking.setEndDate(end);
+		newBooking.setReferenceNumber(bookingService.assignReferenceNumber());
+		newBooking.setBookingDate(LocalDate.now());
+		newBooking.setPayment(newPayment);
+		newBooking.setVehicle(searchService.getAvailableVehicles(start, end)
+										   .stream()
+										   .filter(v -> v.getCategory() == category)
+										   .findFirst()
+										   .orElse(null));									
+		model.addAttribute("booking", newBooking);
+		return "public/book/bookingform";
+	}
+	
+	@PostMapping(value = "/company/public/bookings/addnew/save")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	public String addNewBookingPublic(@Valid @ModelAttribute("booking") Booking booking,
+			BindingResult bindingResult, Model model) {
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("errors", bindingResult.getAllErrors());
+			return "public/book/bookingform";
+		}
+		booking = bookingService.save(booking);
+		return "redirect:/company/public/bookings/success";
+	}
+	
+	@GetMapping(value = "/company/public/bookings/success")
+	public String homePage() {
+		return "public/book/confirmation";
 	}
 
 }

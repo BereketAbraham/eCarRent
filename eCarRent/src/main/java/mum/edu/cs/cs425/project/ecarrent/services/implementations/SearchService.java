@@ -24,21 +24,25 @@ public class SearchService implements ISearchService {
 		this.vehicleRepository = vehicleRepository;
 		this.bookingRepository = bookingRepository;
 	}
-
-
+	
+	@Override
+	public List<Vehicle> getAvailableVehicles(LocalDate start, LocalDate end){
+		List<Vehicle> bookedVehicles = bookingRepository.findAll().stream()
+				.filter(b -> (b.getStartDate().isBefore(start) && b.getEndDate().isAfter(start))
+								|| b.getStartDate().isAfter(start) && b.getStartDate().isBefore(end) )			
+				.map(Booking::getVehicle)
+				.collect(Collectors.toList());		
+		return vehicleRepository.findAll().stream()
+				  				.filter(v -> !bookedVehicles.contains(v))
+				  				.collect(Collectors.toList()); 
+	}
 
 	@Override
 	public List<Category> findAvailableCategories(LocalDate start, LocalDate end) {
-		List<Vehicle> bookedVehicles = bookingRepository.findAll().stream()
-														.filter(b -> (b.getStartDate().isBefore(start) && b.getEndDate().isAfter(start))
-																		|| b.getStartDate().isAfter(start) && b.getStartDate().isBefore(end) )			
-														.map(Booking::getVehicle)
-														.collect(Collectors.toList());
-		List<Vehicle> availableVehicles = vehicleRepository.findAll().stream()
-																	  .filter(v -> !bookedVehicles.contains(v))
-																	  .collect(Collectors.toList());
-		
-		return availableVehicles.stream().map(v -> v.getCategory()).distinct().collect(Collectors.toList());
+		return getAvailableVehicles(start, end).stream()
+											   .map(v -> v.getCategory())
+											   .distinct()
+											   .collect(Collectors.toList());
 	}
 
 }

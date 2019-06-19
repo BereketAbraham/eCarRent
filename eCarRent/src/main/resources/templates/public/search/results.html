@@ -31,12 +31,12 @@
 							</p>	
 						</div>
 					</td>
-					<td th:text="${category.seats} + ' ' +seats" align=bottom></td>
+					<td th:text="${category.seats} + ' ' +seats"></td>
 					<td th:text="${category.doors} + ' ' + doors"></td>
 					<td th:text="${category.fuelEconomy} + mpg"></td>
 					<td th:text="${category.ratePerDay} + ' USD / Day'"></td>
 					<td>
-						<a th:href="@{'/company/search/book/' + ${category.categoryId}}" class="btn btn-outline-success">BOOK</a>
+						<a th:href="@{'/company/public/bookings/addnew/' + ${category.categoryId}}" class="btn btn-outline-success">BOOK</a>
 					</td>
 				</tr>
 			</tbody>

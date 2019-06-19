@@ -22,26 +22,26 @@ public class Payment {
 	private Long paymentId;
 	
 	@Column(name = "payment_date")
-	@NotNull(message = "*Please provide payment date") 
+//	@NotNull(message = "*Please provide payment date") 
 	private Double paymentDate;
 
 	@Column(name = "payment_type")
-	@NotNull(message = "*Please provide payment type") 
+//	@NotNull(message = "*Please provide payment type") 
     private String paymentType;
 
 	@Column(name = "card_number")
-	@NotNull(message = "*Please provide payment card type") 
+//	@NotNull(message = "*Please provide payment card type") 
     private Long cardNumber;
     
 	@Column(name = "card_csv")
-	@NotNull(message = "*Please provide payment card CSV") 
+//	@NotNull(message = "*Please provide payment card CSV") 
     private Integer cardCSV;
     
 	@Column(name = "total_price") 
     private Double totalPrice;
     
 	@Column(name = "payment_status")
-	@NotNull 
+//	@NotNull 
 	private String paymentStatus;
 	
 	@OneToOne(mappedBy = "payment", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
