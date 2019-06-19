@@ -19,25 +19,22 @@ public class RoleService implements IRoleService{
 
 	@Override
 	public List<Role> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return roleRepository.findAll();
 	}
 
 	@Override
 	public Role save(Role role) {
-		// TODO Auto-generated method stub
-		return null;
+		return roleRepository.save(role);
 	}
 
 	@Override
 	public Role findById(Long rId) {
-		// TODO Auto-generated method stub
-		return null;
+		return roleRepository.findById(rId).orElse(null);
 	}
 
 	@Override
 	public void delete(Long rId) {
-		// TODO Auto-generated method stub
+		roleRepository.deleteById(rId);;
 		
 	}
 

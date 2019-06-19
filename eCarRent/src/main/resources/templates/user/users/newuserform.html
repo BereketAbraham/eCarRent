@@ -10,8 +10,7 @@
                 <input type="hidden" name="userId" th:value="${user.userId}" />
                 <div style="float:right;">
                     <a href="/company/user/users" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
-                    <a th:href="@{'/company/user/users/delete/' + ${user.userId}}" class="btn btn-outline-warning">Delete</a>&nbsp;&nbsp;&nbsp;
-                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Update</button>
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Add User</button>
                 </div>
                 <br></br>
                 <div class="form-group">               
